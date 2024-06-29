@@ -4,11 +4,12 @@ const router = express.Router();
 
 
 // const authController = require('../controller/authController');
+const custController = require('../controller/custController');
 
 
 // // router.get('/', adminController.getAdmin);
-// router.post('/signUp',authController.signUp)
-// router.post('/login',authController.logIn)
+router.post('/customersignup',custController.signUp)
+router.post('/customerlogin', custController.logIn)
 
 
 

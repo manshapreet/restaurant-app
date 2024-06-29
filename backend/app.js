@@ -1,8 +1,3 @@
-//npm init
-//npm i express dotenv hbs mongo mongoose nodemon body-parser express-session connect-mongodb-session
-
-
-
 require("dotenv").config();
 
 const path = require('path');
@@ -13,10 +8,13 @@ const bodyparser = require('body-parser');//use with axios
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-app.use(cors( {
-origin: 'http://localhost:3000', credentials: true,
-withCredentials: true
-}))
+app.use(cors( 
+    {
+        origin: 'http://localhost:3000', 
+        credentials: true, 
+        withCredentials: true
+    }
+))
 
 
 const mongoose = require('mongoose');
@@ -63,17 +61,6 @@ const AuthRouter = require('./routes/authentication.js');
 app.use('/', AuthRouter);
 
 
-    
-// app.listen(PORT, () => {
-//     console.log(`http://localhost:` + PORT);
-// })
-
-
-
-
-//////USE BELOW CODE WITH MONGOOSE  
-//////
-
 mongoose.connect(process.env.MONGODB_URL ,{
 //    useNewUrlParser: true,
 //    useUnifiedTopology: true,
@@ -85,4 +72,3 @@ mongoose.connect(process.env.MONGODB_URL ,{
         })
     })
     .catch(err => {console.error(err);});
-
