@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import LoginCustomer from './components/LoginCustomer/LoginCustomer';
 import HomeCustomer from './components/HomeCustomer/HomeCustomer';
 import SignupCustomer from './components/SignupCustomer/SignupCustomer';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
   axios.defaults.withCredentials = true;
 
   return (
-    <Routes >
+    <ShoppingCartProvider>
+      <Routes >
         
           <Route  path="/" element={<Layout/>}>
                 <Route index element={<SignupCustomer />} /> 
@@ -38,6 +40,7 @@ function App() {
           </Route>
           
         </Routes> 
+      </ShoppingCartProvider>
   );
 }
 

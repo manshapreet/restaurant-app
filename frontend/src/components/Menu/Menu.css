@@ -1,0 +1,30 @@
+.Menu{
+    padding: 32px 64px;
+    background-color: #E3E8E4;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.MenuHead{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.menuCategory{
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    /* overflow-x: scroll; */
+    padding: 16px 0;
+    justify-content: center;
+}
+
+.menuCategory::-webkit-scrollbar{display: none;}
+
+.menuTitle{
+    font-size: 24px;
+    /* text-align: left; */
+    font-weight: 500;
+    font-style: italic;
+}

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../hook/useAuth';
 import axios from 'axios'
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const SignupCustomer = () => {
 
@@ -51,20 +53,28 @@ const SignupCustomer = () => {
         
         }, [error])
     
+        const [NameDiv, setNameDiv] = useState(false)
+        const [showLoading, setShowLoading] = useState(false)
     
     
-        const submitNewUser = async (e) => {
+    const submitNewUser = async (e) => {
             e.preventDefault();
            
     
-            if(phone && validPhone && name){
+            if(phone && validPhone){
                 try{
-                    console.log('working')
-                    const data = await axios.post(`http://localhost:4700/customersignup`, {phone, name})
+                  
+                  
+                    //console.log('working')
+                    const data = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/customersignup`, {phone})
             
                     const axiosdata = data.data
                     console.log('/a/a/a',axiosdata);
-            
+                    if(!axiosdata){
+                      setNameDiv(a=>!a);
+                      console.log('welcome!!!  One last thing, show input for name, then a button saying start ordering')
+                    }
+
                     if(axiosdata){
                               
                         const user = axiosdata.Username;
@@ -79,17 +89,23 @@ const SignupCustomer = () => {
         }
     
        
-  return (
+  
+  
+    
+    
+    
+    return (
+    
     <div className='LoginCustomer'>
     
-            <div className="LoginBox"  >
-              <div className='loginHead'>Sign Up</div> 
-          
+          { !NameDiv ? <div className="LoginBox"  >
+              <div className='loginHead'>Craving Something?</div> 
+              <div className='loginSubHead'>Lets get you started</div>
               <div className='LoginPhoneDiv'>
     
-                <div>Enter Phone Number</div>
+                {/* <div>Enter Phone Number</div> */}
                 <input className={`login_input ${inputStyle}`} type='Number'    
-                  placeholder='Phone Number'
+                  placeholder='Enter your Phone Number'
                   onChange={(e)=>setphone(e.target.value)}
                 />
                 { phone && !validPhone? (<p className='loginerror'>
@@ -97,15 +113,38 @@ const SignupCustomer = () => {
                                 </p>): <></>}
               </div>
               
+             
+              
+    
+              <button type="submit" className='LoginSubmit' 
+                onClick={(e)=> submitNewUser(e)}>
+                  Next
+              </button>
+
+              {/* <div>Not your first time dining here? <Link to={'/logincustomer'}>Login</Link></div> */}
+    
+              {/* {error?<p className='invalidUserError'>Some error occured, couldnt sign up.</p>:<></>} */}
+            </div>:
+            <>
+            </>}
+
+
+
+
+         {NameDiv?   <div className="LoginBox"  >
+              <div className='loginHead'>One last Thing</div> 
+              {/* <div className='loginSubHead'>Lets get you started</div> */}
+             
+              
               <div className='LoginnameDiv'>
     
-                <div>Enter Name</div>
+               
                 <input className={`login_input`} type='text'
-                  placeholder='Name' 
+                  placeholder='Can we know your Name' 
                   onChange={(e)=>setname(e.target.value)}
                 />
         
-                {!phone || !name ? (<p className='loginerror'>
+                {!name ? (<p className='loginerror'>
                             please complete all fields.        
                             </p>): <></>}
               </div>
@@ -113,13 +152,22 @@ const SignupCustomer = () => {
     
               <button type="submit" className='LoginSubmit' 
                 onClick={(e)=> submitNewUser(e)}>
-                  Sign Up
+                  Next
               </button>
 
-              <div>Not your first time dining here? <Link to={'/logincustomer'}>Login</Link></div>
+              {/* <div>Not your first time dining here? <Link to={'/logincustomer'}>Login</Link></div> */}
     
-              {error?<p className='invalidUserError'>Some error occured, couldnt sign up.</p>:<></>}
-            </div>
+              {/* {error?<p className='invalidUserError'>Some error occured, couldnt sign up.</p>:<></>} */}
+            </div> : 
+            <>
+            </>   }
+
+            {showLoading? 
+            <Box sx={{ display: 'flex' }}>
+              <CircularProgress />
+            </Box>
+            : <></>}
+
     </div>
   )
 }

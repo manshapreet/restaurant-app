@@ -1,0 +1,32 @@
+.CartSlider{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000059;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 16px;
+    background-color: white;
+    width: 300px;
+}
+
+.closeCartBtn{
+    text-align: right;
+}
+
+.PlaceOrderBtns{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+}

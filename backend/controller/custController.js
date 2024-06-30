@@ -9,17 +9,20 @@ module.exports.signUp = async (req,res)=>{
     let user = await customersDB.findOne({phone});
 
     if(!user){
-        let newCustomer = new customersDB ({phone, name});
-        newCustomer.save()
-         .then((saved)=>{
-            if(saved){
-                req.session.Username=phone;
-                req.session.UserID=saved._id.toString();
-                res.json({Username:req.session.Username})
-            }
-            else{res.send(false);}
-          })
-         .catch(err =>{console.log(err);});
+
+        res.send(false);
+
+        // let newCustomer = new customersDB ({phone, name});
+        // newCustomer.save()
+        //  .then((saved)=>{
+        //     if(saved){
+        //         req.session.Username=phone;
+        //         req.session.UserID=saved._id.toString();
+        //         res.json({Username:req.session.Username})
+        //     }
+        //     else{res.send(false);}
+        //   })
+        //  .catch(err =>{console.log(err);});
     }
 
 }

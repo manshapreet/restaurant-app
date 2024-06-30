@@ -1,6 +1,7 @@
 import React from 'react'
 import './HomeCustomer.css'
 import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
+import Menu from '../Menu/Menu';
 
 
 const HomeCustomer = () => {
@@ -9,9 +10,9 @@ const HomeCustomer = () => {
 
   return (
     <div>
-        <div>welcome {id};</div>
+        {/* <div>welcome {id}</div> */}
 
-        
+        <Menu/>
     </div>
   )
 }

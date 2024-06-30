@@ -60,6 +60,9 @@ app.use(express.static(path.join(__dirname, 'photos')));
 const AuthRouter = require('./routes/authentication.js');
 app.use('/', AuthRouter);
 
+const ordersRouter = require('./routes/orders.js');
+app.use('/', ordersRouter);
+
 
 mongoose.connect(process.env.MONGODB_URL ,{
 //    useNewUrlParser: true,
