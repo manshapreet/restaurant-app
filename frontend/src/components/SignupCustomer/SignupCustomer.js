@@ -14,6 +14,7 @@ const SignupCustomer = () => {
         window.scrollTo(0, 0)
       }, [])
         
+      const {setAuth}=useAuth();
 
       const navigate = useNavigate();
       const [phone, setphone] = useState('');
@@ -64,13 +65,14 @@ const SignupCustomer = () => {
             if(phone && validPhone){
                 try{
                   
-                  
-                    //console.log('working')
+                    setShowLoading(true);
+                    //console.log('working')----------
                     const data = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/customersignup`, {phone})
             
                     const axiosdata = data.data
                     console.log('/a/a/a',axiosdata);
                     if(!axiosdata){
+                      setShowLoading(false);
                       setNameDiv(a=>!a);
                       console.log('welcome!!!  One last thing, show input for name, then a button saying start ordering')
                     }
@@ -78,7 +80,7 @@ const SignupCustomer = () => {
                     if(axiosdata){
                               
                         const user = axiosdata.Username;
-                        // setAuth({user});
+                        setAuth({user});
                         navigate(`/customerhome/${user}`);
                         
                     }                
@@ -89,12 +91,39 @@ const SignupCustomer = () => {
         }
     
        
+      const submitName = async (e) => {
+          e.preventDefault();
+         
   
-  
+          
+              try{
+                
+                  //setShowLoading(true);
+                  //console.log('working')----------
+                  const data = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/submitname`, {phone,name})
+
+                  const axiosdata = data.data
+                  console.log('/a/a/a',axiosdata);
+                  
+
+                  if(axiosdata){
+                            
+                      const user = axiosdata.Username;
+                      setAuth({user});
+                      navigate(`/customerhome/${user}`);
+                      
+                  }                
+                  
+              }      
+              catch(err){console.log(err);}
+          
+      }
+        
     
     
     
-    return (
+    
+        return (
     
     <div className='LoginCustomer'>
     
@@ -151,8 +180,8 @@ const SignupCustomer = () => {
               
     
               <button type="submit" className='LoginSubmit' 
-                onClick={(e)=> submitNewUser(e)}>
-                  Next
+                onClick={(e)=> submitName(e)}>
+                  Start ordering
               </button>
 
               {/* <div>Not your first time dining here? <Link to={'/logincustomer'}>Login</Link></div> */}
@@ -163,9 +192,9 @@ const SignupCustomer = () => {
             </>   }
 
             {showLoading? 
-            <Box sx={{ display: 'flex' }}>
-              <CircularProgress />
-            </Box>
+              <div style={{display:'flex', justifyContent:'center'}}>
+                <CircularProgress />
+              </div>
             : <></>}
 
     </div>

@@ -9,6 +9,7 @@ const custController = require('../controller/custController');
 
 // // router.get('/', adminController.getAdmin);
 router.post('/customersignup',custController.signUp)
+router.post('/submitname',custController.submitName)
 router.post('/customerlogin', custController.logIn)
 
 

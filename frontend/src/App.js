@@ -9,6 +9,7 @@ import LoginCustomer from './components/LoginCustomer/LoginCustomer';
 import HomeCustomer from './components/HomeCustomer/HomeCustomer';
 import SignupCustomer from './components/SignupCustomer/SignupCustomer';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
+import StaffLogin from './components/StaffLogin/StaffLogin';
 
 
 function App() {
@@ -27,13 +28,15 @@ function App() {
                 </Route> */}
 
                 {/* <Route path="signup" element={<SignUp />}/> */}
-                <Route path="logincustomer" element={<LoginCustomer />}/>
+                <Route path="loginstaff" element={<StaffLogin />}/>
                 
 
                 <Route element={<RequireAuth  />}>
 
                     <Route path='customerhome/:id' element={<HomeCustomer/>}/>
                 </Route>
+
+                  {/* <Route path ='' */}
                     
                 
                     {/* <Route path='actor/:query' element={<Actors/>}/> */}
